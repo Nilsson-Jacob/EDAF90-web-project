@@ -1,0 +1,80 @@
+<div>
+
+    <mat-form-field class="form-input-field" style="width: 40%; margin: 20px"
+        (ngSubmit)="getForecastWeather(searchInput.value)">
+        <input matInput type="text" placeholder="Search by city" #searchInput>
+        <button mat-button matSuffix aria-label="Search" (click)="getForecastWeather(searchInput.value)"
+            [disabled]="searchInput.value == ''">
+            <mat-icon>
+                search
+            </mat-icon>
+        </button>
+    </mat-form-field>
+
+</div>
+
+<div *ngIf="storageHasSomething" style="width: 90%; margin-left: auto; margin-right: auto;">
+    <mat-card
+        style="background-color:rgba(216, 216, 216, 0.288); border-radius: 15px; box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.26);">
+
+        <mat-card-header>
+            <mat-card-title>
+                Forecast for {{weatherData['city']['name']}}
+            </mat-card-title>
+        </mat-card-header>
+
+        <div style="padding: 10px;">
+            <mat-card
+                style="background-color:rgba(175, 175, 175, 0.288); border-radius: 15px; margin: 20px; box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.26);"
+                *ngFor="let nbr of weatherResetVector; index as i">
+
+                <mat-card-header>
+                    <mat-card-title>
+                        {{nbr['dt_txt'].substring(0,10)}}
+                    </mat-card-title>
+                </mat-card-header>
+
+                <mat-grid-list cols="4" rowHeight="250px">
+
+                    <mat-grid-tile style="background-color:rgba(62, 163, 246, 0.288); border-radius: 15px;"
+                        *ngFor="let number of count; index as j">
+                        <div *ngIf="weatherDayVector[i*4+j] != null; else elseBlock">
+                            <ul style="list-style-type: none; padding-left: 0px;">
+
+                                <li>
+
+                                    <!-- Datum för tiderna stämmer inte!!! -->
+                                    <p style="font-size: large">
+                                        {{weatherDayVector[i*4+j]['dt_txt'].substring(11,16)}}</p>
+
+                                </li>
+                                <li>
+                                    <img style="height: 60%; width: 60%" mat-card-md-image
+                                        src={{environment.getIconUrlForecast(weatherDayVector,i*4+j)}}>
+                                </li>
+                                <li>
+                                    <p>
+                                        <b>Temperature: </b>
+                                        {{math.round(weatherDayVector[i*4+j]['main']['temp'])}}<i>°C</i>
+                                    </p>
+                                </li>
+                                <li>
+                                    <b>Wind:</b> {{math.round(weatherDayVector[i*4+j]['wind']['speed'])}} <i>m/s</i>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <ng-template #elseBlock>
+                            <p style="font-size: large">[No data available]</p>
+
+                        </ng-template>
+                    </mat-grid-tile>
+
+                </mat-grid-list>
+
+            </mat-card>
+        </div>
+
+    </mat-card>
+</div>

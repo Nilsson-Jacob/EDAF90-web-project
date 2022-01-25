@@ -1,0 +1,28 @@
+
+<div>
+    <mat-grid-list cols="3" rowHeight="4:2">
+
+        <mat-grid-tile style = "background-color:rgba(0, 162, 255, 0.288); text-align: left">
+            <p style="font-size: large"> Stockholm</p>
+            <img mat-card-md-image src={{environment.getIconUrl(weathersthm)}}>
+            <p>{{math.round(weathersthm["main"]["temp"])}}°C</p>
+        </mat-grid-tile>
+    
+        <mat-grid-tile style = "background-color:rgba(255, 123, 0, 0.281);">
+            <p style="font-size: large"> Göteborg</p>
+            <img mat-card-md-image src={{environment.getIconUrl(weathergbg)}}>
+            <p>{{math.round(weathergbg["main"]["temp"])}}°C</p>
+        </mat-grid-tile>
+    
+        <mat-grid-tile style = "background-color:rgba(115, 255, 0, 0.37);">
+            <p style="font-size: large"> Malmö</p>
+            <img mat-card-md-image src={{environment.getIconUrl(weathermlm)}}>
+            <p>{{math.round(weathermlm["main"]["temp"])}}°C</p>
+        </mat-grid-tile>
+    
+    </mat-grid-list>
+</div>
+
+<div style="text-align:right">
+    <p>Last updated: {{timestamp}}</p>
+</div>

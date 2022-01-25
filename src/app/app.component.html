@@ -1,0 +1,43 @@
+<!--Add navigation bar with router links.-->
+
+<div style="text-align:center">
+    <h1 class = "rubric">{{title}}</h1>
+
+    <div>
+        <nav mat-tab-nav-bar>
+            <a mat-tab-link routerLink="/startpage" routerLinkActive="active">Startpage</a>
+            <a mat-tab-link routerLink="/forecast" routerLinkActive="active">Forecast</a>
+            <a mat-tab-link routerLink="/current-weather" routerLinkActive="active">Current Weather</a>
+            <a mat-tab-link routerLink="/statistics" routerLinkActive="active">Yesterdays Weather</a>
+        </nav>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+  
+
+  
+  <!--
+  <div class="form-group">
+    <button type="button" (click)="getWeatherData()">Get data</button>
+  </div>
+  
+  <table class='table'>
+    <thead>
+        <tr>
+          <th>latitud</th>
+          <th>longitud</th>
+          <th>timezone</th>
+          <th>timezone offset</th>
+        </tr>
+      </thead>
+    <tbody>
+        <td>{{weatherData.lat}}</td>
+        <td>{{weatherData.lon}}</td>
+        <td>{{weatherData.timezone}}</td>
+        <td>{{weatherData.timezone_offset}}</td>
+    </tbody>
+  </table>
+  
+  <pre>{{weatherData| json}}</pre>
+  -->
+ 

@@ -1,0 +1,45 @@
+.my-form {
+    width: 70%;
+}
+  
+.my-full-width {
+    width: 50%;
+}
+ 
+input {
+    width: 500px;
+    height: 32px;
+    font-size: medium;
+    border-radius: 6px;
+}
+ 
+.my-card {
+    background-color:rgba(30, 255, 0, 0.288); 
+    border-radius: 0px;
+    padding: 0.7cm;
+    padding-left: 1.5cm;
+    padding-right: 1.5cm;
+}
+
+.my-current-titel {
+    background-color: rgba(30, 255, 0, 0.288); 
+    font-weight: 700; 
+    font-style: italic;
+    font-size: 140%; 
+}
+
+.my-history-titel {
+    background-color:rgb(238, 236, 236); 
+    font-weight: 700; 
+    font-style: italic;
+    font-size: 140%; 
+}
+
+.curr-block{
+    background-color: rgba(30, 255, 0, 0.288);   
+}
+
+.hist-block{
+    background-color:rgb(238, 236, 236);
+}
+ 

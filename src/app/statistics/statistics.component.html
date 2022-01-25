@@ -1,0 +1,98 @@
+<div style="text-align:right">
+    <form class="my-form">
+        <mat-form-field class="form-input-field" style="width: 50%;" 
+        (ngSubmit)="getStatWeather(searchInput.value)">
+            <input matInput placeholder="Search by city" #searchInput>
+        
+        <button mat-button matSuffix  
+        aria-label="Search"
+        (click) = "getStatWeather(searchInput.value)" 
+        [disabled]="searchInput.value == ''">
+            <mat-icon>
+            search
+            </mat-icon>
+        </button>
+        </mat-form-field>
+    </form>
+</div>
+
+
+<div *ngIf="storage"> 
+    <div>
+    <mat-card class="my-card">
+        <mat-card-title>
+            <p style="font-size: 140%; text-align:left; font-weight: 700;"> {{city}}</p>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <p style="text-align:left">{{statData["sys"]["country"]}} </p>
+            <p style="text-align:left">Timezone: UTC ({{sekToh(statData["timezone"])}})   </p>
+        </mat-card-subtitle>
+    </mat-card>
+    </div>
+     
+    <div >
+    <mat-grid-list cols="4" rowHeight="5:1">
+        <mat-grid-tile class = "my-current-titel">
+            <p> Current Weather</p>
+        </mat-grid-tile>
+        <mat-grid-tile class="curr-block"> 
+        </mat-grid-tile>
+
+        <mat-grid-tile class= "my-history-titel" > 
+            <p> Yesterdays Weather</p>
+        </mat-grid-tile>
+        <mat-grid-tile class="hist-block"> 
+        </mat-grid-tile>
+     
+     
+        <mat-grid-tile class="curr-block">
+            <p>{{toUpper(statData["weather"][0]["description"])}} </p>
+            <img mat-card-md-image src={{environment.getIconUrl(statData)}}>
+        </mat-grid-tile>
+        <mat-grid-tile class="curr-block">
+            <p> Temperatur {{math.round(statData["main"]["temp"])}} °C </p>
+        </mat-grid-tile>
+
+        <mat-grid-tile class="hist-block">
+            <p> {{toUpper(historyData["current"]["weather"][0]["description"])}} </p>
+            <img mat-card-md-image src={{environment.getHistoryIconUrl(historyData)}}>
+        </mat-grid-tile>
+        <mat-grid-tile class="hist-block">
+            <p> Temperatur: {{environment.toCelsius(historyData["current"]["temp"])}}°C </p>
+        </mat-grid-tile>
+     
+        <mat-grid-tile class="curr-block">
+            <p>Humidity: {{statData["main"]["humidity"]}} %</p>
+        </mat-grid-tile>
+        <mat-grid-tile class="curr-block">
+            <p>  Wind speed: {{math.round(statData["wind"]["speed"])}} m/s</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile class="hist-block">
+            <p>  Humidity: {{historyData["current"]["humidity"]}}%</p>
+        </mat-grid-tile>
+        <mat-grid-tile class="hist-block">
+            <p>  Wind speed: {{math.round(historyData["current"]["wind_speed"])}} m/s </p>
+        </mat-grid-tile>
+     
+        <mat-grid-tile class="curr-block">
+            <p>Sunrise: {{calcUnix(statData["sys"]["sunrise"])}} </p>
+        </mat-grid-tile>
+        <mat-grid-tile class="curr-block">
+            <p>Sunset: {{calcUnix(statData["sys"]["sunset"])}} </p>
+        </mat-grid-tile>
+
+        <mat-grid-tile class="hist-block">
+            <p>Sunrise: {{calcUnix(historyData["current"]["sunrise"])}}</p>
+        </mat-grid-tile>
+        <mat-grid-tile class="hist-block">
+            <p>Sunset: {{calcUnix(historyData["current"]["sunset"])}}</p>
+        </mat-grid-tile>
+    </mat-grid-list>
+    </div>
+
+
+    <div style="text-align:right">
+        <p>Last updated: {{timestamp}}</p>
+    </div>
+</div>
